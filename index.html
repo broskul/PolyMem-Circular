@@ -804,11 +804,20 @@ function calc(){
  document.getElementById('outCircularCost').textContent=money(circularCost);
  document.getElementById('outCostSaving').textContent=money(costSaving);
  document.getElementById('outPremium').textContent=money(incrementalRevenue);
- document.getElementById('outUplift').textContent=money(uplift);
+document.getElementById('outUplift').textContent=money(uplift);
  document.getElementById('outHours').textContent=Math.round(hours)+'h';
  document.getElementById('outPayback').textContent=(payback||0).toFixed(1)+'m';
 }
 ['clients','unitsClient','price','premium','fedexSave','minutes'].forEach(id=>document.getElementById(id).addEventListener('input',calc));
 show(0); calc();
+
+const params = new URLSearchParams(window.location.search);
+const slideParam = parseInt(params.get('slide'), 10);
+if (Number.isInteger(slideParam)) {
+  show(slideParam - 1);
+}
+if (params.get('hidectrls') === '1') {
+  document.querySelector('.controls')?.remove();
+}
 </script>
 </body></html>
